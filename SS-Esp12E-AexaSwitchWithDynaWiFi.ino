@@ -37,8 +37,6 @@ void eighthLightChanged(uint8_t brightness);
 
 Espalexa espalexa;
 
-EspalexaDevice* device3; //this is optional
-
 void setup()
 {
   Serial.begin(115200);
@@ -60,26 +58,21 @@ void setup()
   digitalWrite(RELAY_6, HIGH);
   digitalWrite(RELAY_7, HIGH);
   digitalWrite(RELAY_8, HIGH);
-  // Initialise wifi connection
+  
   WiFi.mode(WIFI_STA);
   WiFiManager wm;
   bool wifiConnected;
   wifiConnected = wm.autoConnect("SsAlexaSwitch");
 
   if(wifiConnected){
-    
-    // Define your devices here. 
-    espalexa.addDevice(Device_1_Name, firstLightChanged); //simplest definition, default state off
-    espalexa.addDevice(Device_2_Name, secondLightChanged); //third parameter is beginning state (here fully on)
+    espalexa.addDevice(Device_1_Name, firstLightChanged); 
+    espalexa.addDevice(Device_2_Name, secondLightChanged);
     espalexa.addDevice(Device_3_Name, thirdLightChanged);
     espalexa.addDevice(Device_4_Name, fourthLightChanged);
     espalexa.addDevice(Device_5_Name, fifthLightChanged);
     espalexa.addDevice(Device_6_Name, sixthLightChanged);
     espalexa.addDevice(Device_7_Name, seventhLightChanged);
     espalexa.addDevice(Device_8_Name, eighthLightChanged);
-    //device3 = new EspalexaDevice("Light 3", thirdLightChanged); //you can also create the Device objects yourself like here
-    //espalexa.addDevice(device3); //and then add them
-    //device3->setValue(128); //this allows you to e.g. update their state value at any time!
     espalexa.begin();
 
     ArduinoOTA.onStart([]() {
@@ -89,8 +82,6 @@ void setup()
     } else {  // U_FS
       type = "filesystem";
     }
-
-    // NOTE: if updating FS this would be the place to unmount FS using FS.end()
     Serial.println("Start updating " + type);
   });
 
@@ -144,13 +135,8 @@ void loop()
   delay(1);
 }
 
-//our callback functions
 void firstLightChanged(uint8_t brightness) {
     Serial.print("Device 1 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -163,10 +149,7 @@ void firstLightChanged(uint8_t brightness) {
 }
 
 void secondLightChanged(uint8_t brightness) {
-  //do what you need to do here
     Serial.print("Device 2 changed to ");
-    //do what you need to do here
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -180,10 +163,6 @@ void secondLightChanged(uint8_t brightness) {
 
 void thirdLightChanged(uint8_t brightness) {
     Serial.print("Device 3 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -193,15 +172,10 @@ void thirdLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_3, HIGH);
     }
-  //do what you need to do here
 }
 
 void fourthLightChanged(uint8_t brightness) {
     Serial.print("Device 4 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -211,15 +185,10 @@ void fourthLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_4, HIGH);
     }
-  //do what you need to do here
 }
 
 void fifthLightChanged(uint8_t brightness) {
     Serial.print("Device 5 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -229,15 +198,10 @@ void fifthLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_5, HIGH);
     }
-  //do what you need to do here
 }
 
 void sixthLightChanged(uint8_t brightness) {
     Serial.print("Device 6 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -247,15 +211,10 @@ void sixthLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_6, HIGH);
     }
-  //do what you need to do here
 }
 
 void seventhLightChanged(uint8_t brightness) {
     Serial.print("Device 7 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -265,15 +224,10 @@ void seventhLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_7, HIGH);
     }
-  //do what you need to do here
 }
 
 void eighthLightChanged(uint8_t brightness) {
     Serial.print("Device 8 changed to ");
-    
-    //do what you need to do here
-
-    //EXAMPLE
     if (brightness) {
       Serial.print("ON, brightness ");
       Serial.println(brightness);
@@ -283,5 +237,4 @@ void eighthLightChanged(uint8_t brightness) {
       Serial.println("OFF");
       digitalWrite(RELAY_8, HIGH);
     }
-  //do what you need to do here
 }
